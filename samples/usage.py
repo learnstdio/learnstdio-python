@@ -4,14 +4,14 @@
 #   ---------------------------------------------------------------------------------
 """Usage illustration of the learnstdio."""
 
-from learnstdio.model import load_model
+from learnstdio import load_pipeline
 from sensors import get_phase_iv
 
 ia, va = get_phase_iv("a")
 ib, vb = get_phase_iv("b")
 ic, vc = get_phase_iv("c")
 
-model = load_model('./samples/learnstdio.model.json')
-ground_fault = model.predict(ia, ib, ic, va, vb, vc)
+pipeline = load_pipeline('./samples/learnstdio.pipeline.json')
+ground_fault = pipeline.predict(ia, ib, ic, va, vb, vc)
 
 print(f'Ground fault detected: {ground_fault}')

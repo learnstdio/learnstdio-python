@@ -2,7 +2,7 @@
 #   Copyright (c) Learnstdio. All rights reserved.
 #   Licensed under the MIT License. See LICENSE in project root for information.
 #   ---------------------------------------------------------------------------------
-"""This is Model module."""
+"""This is Pipeline module."""
 
 
 from __future__ import annotations
@@ -10,8 +10,8 @@ import json
 from sklearn.neighbors import KNeighborsClassifier
 
 
-def load_model(path: str) -> LoadableModel:
-    """This is to load a model from a file."""
+def load_pipeline(path: str) -> LoadableModel:
+    """This is to load a pipeline from a file."""
     # Read file
     if not path:
         raise ValueError('Path not provided')
