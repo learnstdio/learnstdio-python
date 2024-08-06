@@ -3,11 +3,11 @@ requires = ["flit_core >=2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name =  "py-project-toml"
+name =  "learnstdio-toml"
 authors = [
-    {name = "Daniel Ciborowski", email = "dciborow@microsoft.com"},
+    {name = "Bruno Lima", email = "blima@learnstdio.com"},
 ]
-description = "Sample Python Project for creating a new Python Module"
+description = "Learnstdio for Python"
 readme = "README.md"
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -47,12 +47,12 @@ test = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/microsoft/python-package-template/tree/main#readme"
-Source = "https://github.com/microsoft/python-package-template"
-Tracker = "https://github.com/microsoft/python-package-template/issues"
+Documentation = "https://github.com/learnstdio/learnstdio-python/tree/main#readme"
+Source = "https://github.com/learnstdio/learnstdio-python"
+Tracker = "https://github.com/learnstdio/learnstdio-python/issues"
 
 [tool.flit.module]
-name = "python_package"
+name = "learnstdio"
 
 [tool.bandit]
 exclude_dirs = ["build","dist","tests","scripts"]

@@ -1,11 +1,11 @@
 #   ---------------------------------------------------------------------------------
-#   Copyright (c) Microsoft Corporation. All rights reserved.
+#   Copyright (c) Learnstdio. All rights reserved.
 #   Licensed under the MIT License. See LICENSE in project root for information.
 #   ---------------------------------------------------------------------------------
 """This is a sample python file for testing functions from the source code."""
 from __future__ import annotations
 
-from python_package.hello_world import hello_world
+from learnstdio.hello_world import hello_world
 
 
 def hello_test():

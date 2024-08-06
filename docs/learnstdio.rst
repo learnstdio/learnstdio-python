@@ -1,4 +1,4 @@
-python\_package package
+learnstdio package
 =======================
 
 Subpackages
@@ -7,15 +7,15 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   python_package.hello_world
+   learnstdio.hello_world
 
 Submodules
 ----------
 
-python\_package.setup module
+learnstdio.setup module
 ----------------------------
 
-.. automodule:: python_package.setup
+.. automodule:: learnstdio.setup
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ python\_package.setup module
 Module contents
 ---------------
 
-.. automodule:: python_package
+.. automodule:: learnstdio
    :members:
    :undoc-members:
    :show-inheritance:
