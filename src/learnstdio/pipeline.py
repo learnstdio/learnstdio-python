@@ -27,7 +27,7 @@ def load_model(model: dict) -> LoadableModel:
         raise ValueError('Model parameters not found')
     # Create a model object
     new_model = None
-    if 'knn' in model['name']:
+    if 'K-Nearest Neighbors' in model['name']:
         new_model = LoadableKNN(parameters)
     else:
         raise ValueError('Model not supported')
