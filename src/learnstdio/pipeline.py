@@ -9,25 +9,24 @@ from __future__ import annotations
 import json
 from sklearn.neighbors import KNeighborsClassifier
 
-
-def load_pipeline(path: str) -> LoadableModel:
-    """This is to load a pipeline from a file."""
-    # Read file
+def read_parameters(path: str) -> dict:
+    """This is to read parameters from a file."""
     if not path:
         raise ValueError('Path not provided')
     if not path.endswith('.json'):
         raise ValueError('File format not supported')
     with open(path, 'r') as file:
         data = json.load(file)
-    # Read model information
-    model = data['model']
-    if not model:
-        raise ValueError('Model not found')
+    return data
+
+def load_model(model: dict) -> LoadableModel:
+    """This is to load a model from parameters."""
     # Read model parameters information
     parameters = model['parameters']
     if not parameters:
         raise ValueError('Model parameters not found')
     # Create a model object
+    new_model = None
     if 'knn' in model['name']:
         new_model = LoadableKNN(parameters)
     else:
@@ -35,6 +34,18 @@ def load_pipeline(path: str) -> LoadableModel:
     #
     return new_model
 
+def load_pipeline(path: str) -> LoadableModel:
+    """This is to load a pipeline from a file."""
+    # Read file
+    data = read_parameters(path)
+    # Read model information
+    model = data['model']
+    if not model:
+        raise ValueError('Model not found')
+    # Read model parameters information
+    new_model = load_model(model)
+    #
+    return new_model
 
 class LoadableModel:
     """Loadable model from parameters."""
