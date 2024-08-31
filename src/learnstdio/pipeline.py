@@ -7,7 +7,9 @@
 
 from __future__ import annotations
 import json
+import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LinearRegression
 
 def read_parameters(path: str) -> dict:
     """This is to read parameters from a file."""
@@ -29,6 +31,8 @@ def load_model(model: dict) -> LoadableModel:
     new_model = None
     if 'K-Nearest Neighbors' in model['name']:
         new_model = LoadableKNN(parameters)
+    elif 'Multivariate Linear Regression' in model['name']:
+        new_model = LoadableMultivariableLinearRegression(parameters)
     else:
         raise ValueError('Model not supported')
     #
@@ -56,14 +60,18 @@ class LoadableModel:
 
     def predict(self, *args):
         """Predict the output from the model."""
-        return self.model.predict([args])[0]
-
+        # Convert args to a 2D array
+        input_features = np.array(args).reshape(1, -1)
+        # Make prediction
+        prediction = self.model.predict(input_features)
+        # Return the first (and only) prediction
+        return prediction.item() if prediction.size == 1 else prediction
 
 class LoadableKNN(LoadableModel):
     """Loadable KNN model from parameters."""
 
     def __init__(self, parameters):
-        """Initialize the KNN model."""
+        """Initialize the model."""
         super().__init__()
         self.model = KNeighborsClassifier(
             n_neighbors=parameters['n_neighbors'],
@@ -72,3 +80,14 @@ class LoadableKNN(LoadableModel):
             parameters['X'],
             parameters['y'],
         )
+
+
+class LoadableMultivariableLinearRegression(LoadableModel):
+    """Loadable Linear Regression model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        self.model = LinearRegression()
+        self.model.coef_ = np.array(parameters['weights'][:-1]).reshape(1, -1)
+        self.model.intercept_ = np.array(parameters['weights'][-1])
