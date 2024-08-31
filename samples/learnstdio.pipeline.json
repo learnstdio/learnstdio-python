@@ -21,7 +21,7 @@
         ]
     },
     "model": {
-        "name": "knn",
+        "name": "K-Nearest Neighbors",
         "parameters": {
             "n_neighbors": 5,
             "X": [
