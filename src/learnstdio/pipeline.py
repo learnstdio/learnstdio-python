@@ -23,20 +23,32 @@ def read_parameters(path: str) -> dict:
 
 def load_model(model: dict) -> LoadableModel:
     """This is to load a model from parameters."""
-    # Read model parameters information
-    parameters = model['parameters']
-    if not parameters:
+    if not model:
         raise ValueError('Model parameters not found')
     # Create a model object
-    new_model = None
+    new_model_instance = None
     if 'K-Nearest Neighbors' in model['name']:
-        new_model = LoadableKNN(parameters)
+        new_model_instance = LoadableKNN(model)
     elif 'Multivariate Linear Regression' in model['name']:
-        new_model = LoadableMultivariableLinearRegression(parameters)
+        new_model_instance = LoadableMultivariableLinearRegression(model)
+    elif 'Decision Tree Classifier' in model['name']:
+        new_model_instance = LoadableDecisionTreeClassifier(model)
+    elif 'Decision Tree Regression' in model['name']:
+        new_model_instance = LoadableDecisionTreeRegression(model)
+    elif 'Logistic Regression' in model['name']:
+        new_model_instance = LoadableLogisticRegression(model)
+    elif 'Gaussian Naive Bayes' in model['name']:
+        new_model_instance = LoadableGaussianNaiveBayes(model)
+    elif 'Multinomial Naive Bayes' in model['name']:
+        new_model_instance = LoadableMultinomialNaiveBayes(model)
+    elif 'Random Forest Classifier' in model['name']:
+        new_model_instance = LoadableRandomForestClassifier(model)
+    elif 'Random Forest Regression' in model['name']:
+        new_model_instance = LoadableRandomForestRegression(model)
     else:
         raise ValueError('Model not supported')
     #
-    return new_model
+    return new_model_instance
 
 def load_pipeline(path: str) -> LoadableModel:
     """This is to load a pipeline from a file."""
@@ -63,6 +75,8 @@ class LoadableModel:
         # Convert args to a 2D array
         input_features = np.array(args).reshape(1, -1)
         # Make prediction
+        if not self.model:
+            raise ValueError('Model was not loaded')
         prediction = self.model.predict(input_features)
         # Return the first (and only) prediction
         return prediction.item() if prediction.size == 1 else prediction
@@ -91,3 +105,59 @@ class LoadableMultivariableLinearRegression(LoadableModel):
         self.model = LinearRegression()
         self.model.coef_ = np.array(parameters['weights'][:-1]).reshape(1, -1)
         self.model.intercept_ = np.array(parameters['weights'][-1])
+
+class LoadableDecisionTreeClassifier(LoadableModel):
+    """Loadable Decision Tree Classifier model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        raise NotImplementedError('Decision Tree Classifier coming soon!')
+
+class LoadableDecisionTreeRegression(LoadableModel):
+    """Loadable Decision Tree Regression model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        raise NotImplementedError('Decision Tree Regression coming soon!')
+
+class LoadableLogisticRegression(LoadableModel):
+    """Loadable Logistic Regression model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        raise NotImplementedError('Logistic Regression coming soon!')
+
+class LoadableGaussianNaiveBayes(LoadableModel):
+    """Loadable Gaussian Naive Bayes model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        raise NotImplementedError('Gaussian Naive Bayes coming soon!')
+
+class LoadableMultinomialNaiveBayes(LoadableModel):
+    """Loadable Multinomial Naive Bayes model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        raise NotImplementedError('Multinomial Naive Bayes coming soon!')
+
+class LoadableRandomForestClassifier(LoadableModel):
+    """Loadable Random Forest Classifier model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        raise NotImplementedError('Random Forest Classifier coming soon!')
+
+class LoadableRandomForestRegression(LoadableModel):
+    """Loadable Random Forest Regression model from parameters."""
+
+    def __init__(self, parameters):
+        """Initialize the model."""
+        super().__init__()
+        raise NotImplementedError('Random Forest Regression coming soon!')
