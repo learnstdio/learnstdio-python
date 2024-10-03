@@ -88,7 +88,7 @@ class LoadableKNN(LoadableModel):
         """Initialize the model."""
         super().__init__()
         self.model = KNeighborsClassifier(
-            n_neighbors=parameters['n_neighbors'],
+            n_neighbors=parameters['k'],
         )
         self.model.fit(
             parameters['X'],
